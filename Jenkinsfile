@@ -18,5 +18,26 @@ pipeline{
                 git branch 'main', url: 'https://github.com/pradyumna93/Project-1.git'
             }
         }
+        stage ('terraform version'){
+            steps{
+                sh 'terraform --version'
+            }
+        }
+        stage('sonar analysis'){
+            steps{
+                withSonarQubeEnv('sonar-server'){
+                    sh'''$$SCANNER_HOME/bin/sonar-scanner\
+                    -Dsonar.projectName=Terraform \
+                    -Dsonar.projectKey=Terraform '''
+                }
+            }
+        }
+        stage("quality gate"){
+           steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                }
+            } 
+        }
     }
 }
