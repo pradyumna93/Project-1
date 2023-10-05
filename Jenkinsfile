@@ -1,8 +1,8 @@
 pipeline{
     agent any
     tools{
-        jdk 'jdk17'
-        terraform 'terraform'
+        jdk 'java11'
+        terraform 'Terraform'
     }
     environment {
         SCANNER_HOME=tool 'sonar-scanner'
