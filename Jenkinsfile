@@ -27,8 +27,8 @@ pipeline{
             steps{
                 withSonarQubeEnv('sonar-server'){
                     sh'''$$SCANNER_HOME/bin/sonar-scanner\
-                    -Dsonar.projectName=Terraform \
-                    -Dsonar.projectKey=Terraform '''
+                    -Dsonar.projectName=jenkins \
+                    -Dsonar.projectKey=jenkins '''
                 }
             }
         }
